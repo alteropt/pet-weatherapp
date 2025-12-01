@@ -1,0 +1,76 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+
+	color: var(--text--active-color);
+}
+
+.data {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.data-large {
+	gap: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.temp {
+	font-size: 3rem;
+}
+
+.temp-large {
+	font-size: 12rem;
+}
+
+.temp-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.extra {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.extra-large {
+	gap: 1.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.extra span {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+
+.extra-large span {
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.feels-like {
+	font-size: 1rem;
+}
+
+.feels-like,
+.description {
+	opacity: 0.8;
+}
+
+.description-large {
+	font-size: 2rem;
+}
