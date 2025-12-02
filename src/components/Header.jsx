@@ -7,7 +7,7 @@ const Header = () => {
 	return (
 		<header className='header'>
 			<button className='header__city' onClick={openModal}>
-				{city ? city : 'Minsk'}
+				{city ? city.charAt(0).toUpperCase() + city.slice(1) : 'Minsk'}
 			</button>
 			<span className='header__date'>{getFormattedDate()}</span>
 		</header>

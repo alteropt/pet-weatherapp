@@ -7,21 +7,31 @@ import { useWeather } from '../../hooks/useWeather'
 import classes from './SearchCityModal.module.css'
 
 const SearchCityModal = () => {
-	const { setWeather } = useWeather()
-	const { isModalOpen, closeModal, city, setCity } = useSearchCityModal()
+	const { setWeather, isLoading, setIsLoading } = useWeather()
+	const { isModalOpen, closeModal, setCity } = useSearchCityModal()
 	const [error, setError] = useState('')
+	const [inputValue, setInputValue] = useState('')
 
-	async function handleCityChange(event) {
-		event.preventDefault()
+	const handleCityChange = async e => {
+		e.preventDefault()
+		const cityName = inputValue.trim()
 
+		if (!cityName) {
+			setError('Please enter a city name')
+			return
+		}
+
+		setError('')
+		setIsLoading(true)
 		try {
-			const data = await getWeatherScreenData(event.target[0].value)
+			const data = await getWeatherScreenData(cityName)
 			setWeather(data)
+			setCity(cityName)
 			closeModal()
-			setCity(event.target[0].value)
-			setError('')
 		} catch {
 			setError('The city was not found!')
+		} finally {
+			setIsLoading(false)
 		}
 	}
 
@@ -31,23 +41,32 @@ const SearchCityModal = () => {
 		<div className={classes.modal} onClick={closeModal}>
 			<form
 				className={classes.form}
-				onSubmit={event => handleCityChange(event)}
-				onClick={event => event.stopPropagation()}
+				onSubmit={handleCityChange}
+				onClick={e => e.stopPropagation()}
 			>
 				<div className={classes['input-container']}>
 					<input
-						city={city}
 						type='text'
 						className={classes['city-input']}
 						placeholder='Enter city name'
+						value={inputValue}
+						onChange={e => setInputValue(e.target.value)}
+						autoFocus
+						disabled={isLoading}
 					/>
+					{isLoading && <p className={classes.loading}>Loading...</p>}
 					<label className={classes.error}>{error}</label>
 				</div>
+
 				<button type='submit' className={classes['enter-button']}>
 					Enter
 				</button>
 
-				<button onClick={closeModal} className={classes['close-button']}>
+				<button
+					type='button'
+					onClick={closeModal}
+					className={classes['close-button']}
+				>
 					<X />
 				</button>
 			</form>

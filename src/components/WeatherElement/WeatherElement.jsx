@@ -3,9 +3,9 @@ import { useWeather } from '../../hooks/useWeather'
 import classes from './WeatherElement.module.css'
 
 const WeatherElement = ({ isLarge = false, isFeelsLikeNeeded = false }) => {
-	const { weather } = useWeather()
+	const { weather, isLoading } = useWeather()
 
-	if (!weather || weather.length === 0) return 'Loading...'
+	if (isLoading) return 'Loading...'
 
 	const currentWeather = weather.current.response[0].periods[0]
 

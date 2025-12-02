@@ -9,6 +9,7 @@ const WeeklyForecast = ({ weather }) => {
 				marginTop: '3rem',
 				justifyContent: 'center',
 				gap: '1rem',
+				flexWrap: 'wrap',
 			}}
 		>
 			{weather.periods.map((period, index) => {
@@ -28,6 +29,7 @@ const WeeklyForecast = ({ weather }) => {
 						period={periodName}
 						temp={period.feelslikeC}
 						description={period.weather}
+						style={{ flexBasis: 'initial' }}
 					/>
 				)
 			})}

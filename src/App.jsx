@@ -4,15 +4,19 @@ import WeeklyForecast from './components/WeeklyForecast/WeeklyForeCast'
 import { useWeather } from './hooks/useWeather'
 
 function App() {
-	const { weather } = useWeather()
-
-	if (!weather) return <div>Loading...</div>
+	const { weather, isLoading } = useWeather()
 
 	return (
 		<>
 			<Modal />
-			<WeatherElement isLarge={true} weather={weather.current.response} />
-			<WeeklyForecast weather={weather.daily.response[0]} />
+			{isLoading ? (
+				<div>Loading...</div>
+			) : (
+				<>
+					<WeatherElement isLarge={true} weather={weather.current.response} />
+					<WeeklyForecast weather={weather.daily.response[0]} />
+				</>
+			)}
 		</>
 	)
 }
