@@ -1,19 +1,32 @@
 import { Droplet, Wind } from 'lucide-react'
 import { useWeather } from '../../hooks/useWeather'
+import Skeleton from '../UI/Skeleton/SKeleton'
 import classes from './WeatherElement.module.css'
 
 const WeatherElement = ({ isLarge = false, isFeelsLikeNeeded = false }) => {
 	const { weather, isLoading } = useWeather()
 
-	if (isLoading) return 'Loading...'
+	if (isLoading) {
+		return (
+			<div className={classes.container}>
+				<Skeleton size={isLarge ? 100 : 50} />
+			</div>
+		)
+	}
+	if (weather?.error) {
+		return (
+			<div className={classes.container}>
+				<p>{weather?.error}</p>
+			</div>
+		)
+	}
 
-	const currentWeather = weather.current.response[0].periods[0]
-
-	const tempC = currentWeather.tempC
-	const description = currentWeather.weather
-	const humidity = currentWeather.humidity
-	const windSpeedMPH = currentWeather.windSpeedMPH
-	const feelsLike = currentWeather.feelslikeC
+	const currentWeather = weather?.current.response[0].periods[0]
+	const tempC = currentWeather?.tempC
+	const description = currentWeather?.weather
+	const humidity = currentWeather?.humidity
+	const windSpeedMPH = currentWeather?.windSpeedMPH
+	const feelsLike = currentWeather?.feelslikeC
 
 	return (
 		<div className={classes.container}>
@@ -46,7 +59,7 @@ const WeatherElement = ({ isLarge = false, isFeelsLikeNeeded = false }) => {
 					Feels like {feelsLike}°
 				</p>
 			)}
-			{!isLarge && <p className={classes.description}>Cloudy</p>}
+			{!isLarge && <p className={classes.description}>{description}</p>}
 		</div>
 	)
 }

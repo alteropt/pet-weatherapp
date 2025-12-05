@@ -67,7 +67,7 @@ const SearchCityModal = () => {
 					onClick={closeModal}
 					className={classes['close-button']}
 				>
-					<X />
+					<X size={24} />
 				</button>
 			</form>
 		</div>,

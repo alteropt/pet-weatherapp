@@ -1,7 +1,10 @@
+import { useWeather } from '../../hooks/useWeather'
 import { getWeekdayFromDate } from '../../utils/getWeekday'
 import WeatherCard from '../WeatherCard/WeatherCard'
 
-const WeeklyForecast = ({ weather }) => {
+const WeeklyForecast = () => {
+	const { weather } = useWeather()
+	const currentWeather = weather?.daily.response[0]
 	return (
 		<div
 			style={{
@@ -12,7 +15,7 @@ const WeeklyForecast = ({ weather }) => {
 				flexWrap: 'wrap',
 			}}
 		>
-			{weather.periods.map((period, index) => {
+			{currentWeather?.periods.map((period, index) => {
 				let periodName
 
 				if (index === 0) {

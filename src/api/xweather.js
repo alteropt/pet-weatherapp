@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-const id = import.meta.env.VITE_XWEATHER_ID
-const secret = import.meta.env.VITE_XWEATHER_SECRET
+const id = import.meta.env.VITE_XWEATHER_ID && 'Jn59VSo2qB0v6OSHaMqAc' // Jn59VSo2qB0v6OSHaMqAc
+const secret =
+	import.meta.env.VITE_XWEATHER_SECRET &&
+	'3zBPJi6oUA3tbFipjiCbAGoQsQHD0vdqSc9FWIKK' // 3zBPJi6oUA3tbFipjiCbAGoQsQHD0vdqSc9FWIKK
 
 export const api = axios.create({
 	baseURL: 'https://data.api.xweather.com',

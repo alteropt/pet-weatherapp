@@ -1,6 +1,18 @@
+import { useWeather } from '../../hooks/useWeather'
+import Skeleton from '../UI/Skeleton/SKeleton'
 import classes from './WeatherCard.module.css'
 
 const WeatherCard = ({ period, temp, description, style }) => {
+	const { isLoading } = useWeather()
+
+	if (isLoading) {
+		return (
+			<div className={classes.card} style={{ ...style }}>
+				<Skeleton />
+			</div>
+		)
+	}
+
 	let resultingDescription = description
 
 	if (description.toLowerCase().includes('cloudy')) {
