@@ -31,7 +31,7 @@ const Sidebar = () => {
 				className='sidebar__burger'
 				onClick={() => setIsSidebarOpen(true)}
 			>
-				<Menu />
+				<Menu color='#000' />
 			</button>
 		)
 	}
